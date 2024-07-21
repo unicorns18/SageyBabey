@@ -1,4 +1,12 @@
-from interactions import Color, Embed, Extension, listen, Client, Member
+from interactions import (
+    Color,
+    ComponentContext,
+    Embed,
+    Extension,
+    listen,
+    Client,
+    Member
+)
 
 
 class GreetExtension(Extension):

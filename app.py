@@ -6,7 +6,7 @@ import os
 
 logger = logutils.CustomLogger(__name__)
 client = Client(
-    token="YOUR_BOT_TOKEN"
+    token="YOUR_BOT_TOKEN",
     intents=interactions.Intents.ALL,
 )
 

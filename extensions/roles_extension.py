@@ -4,6 +4,13 @@ from interactions import (
 )
 
 
+WHITELISTED_IDS = [686107711829704725, 807047780538908723]
+
+
+def is_whitelisted(ctx: ComponentContext):
+    return ctx.author_id in WHITELISTED_IDS
+
+
 class RolesExtension(Extension):
     def __init__(self, bot: Client):
         self.bot: Client = bot
@@ -17,6 +24,9 @@ class RolesExtension(Extension):
         name="age_roles", description="Send age roles embed"
     )
     async def age_roles(self, ctx: ComponentContext):
+        if not is_whitelisted(ctx):
+            return await ctx.send("You are not whitelisted!", ephemeral=True)
+        
         embed = Embed(
             title="Age Roles",
             description="Select your age role by clicking "

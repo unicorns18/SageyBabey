@@ -2,6 +2,13 @@ from interactions import Button, ButtonStyle, Color, ComponentContext, Embed, \
     Extension, Client, Guild, Member, component_callback, slash_command
 
 
+WHITELISTED_IDS = [686107711829704725, 807047780538908723]
+
+
+def is_whitelisted(ctx: ComponentContext):
+    return ctx.author_id in WHITELISTED_IDS
+
+
 class VerifyExtension(Extension):
     def __init__(self, bot: Client):
         self.bot: Client = bot
@@ -15,6 +22,9 @@ class VerifyExtension(Extension):
         description="Send a verification embed",
     )
     async def verify(self, ctx: ComponentContext):
+        if not is_whitelisted(ctx):
+            return await ctx.send("You are not whitelisted!", ephemeral=True)
+        
         embed = Embed(
             title="Verification",
             description="Click the button below to verify your account."
